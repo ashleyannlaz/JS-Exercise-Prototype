@@ -77,11 +77,43 @@ function Airplane(name) {
           + The `drive` method should return a string "I ran out of fuel at x miles!" x being `odometer`.
   */
   
- function Car() {
-    
+ function Car(model,milesPerGallon) {
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
   }
   
+  Car.prototype.fill = function(gallons){
+    this.tank = this.tank + gallons;
+  }
+
+  // Car.prototype.drive = function(distance) {
+  //   let maxDistance = this.tank * this.milesPerGallon;
+  //   if(distance < maxDistance){
+  //     // STRETCH # 1: cause odometer to go up 
+  //     this.odometer = this.odometer + distance;
   
+  //     // STRETCH # 2: cause the tank to go down
+  //     const driveMiles = distance / this.milesPerGallon;
+  //     this.tank = this.tank - driveMiles;
+  //   } else {
+  //     this.odometer = this.odometer + maxDistance;
+  //     this.tank = 0;
+  //     return `I ran out of fuel at ${this.odometer} miles!`
+  //   } 
+  // }
+  
+  // const batMobile = new Car('Bat Mobile', 20)
+  
+  // console.log(batMobile);
+  // batMobile.fill(10);
+  // console.log(batMobile.tank);
+  // batMobile.drive(100);
+  // console.log(batMobile.odometer, batMobile.tank);
+  // batMobile.drive(100);
+  // console.log(batMobile.odometer, batMobile.tank);
+  // console.log(batMobile.drive(100));
   /*
     TASK 3
       - Write a Baby constructor subclassing Person.
@@ -89,11 +121,20 @@ function Airplane(name) {
       - Besides the methods on Person.prototype, babies have the ability to `.play()`:
           + Should return a string "Playing with x", x being the favorite toy.
   */
- function Baby() {
+ function Baby(name, age, favoriteToy) {
+   Person.call(this,name,age)
+   this.name = name;
+   this.age = age;
+   this.favoriteToy = favoriteToy;
    
   }
  
+  Baby.prototype = Object.create(Person.prototype);
   
+  Baby.prototype.play = function(favoriteToy) {
+    return `Playing with ${this.favoriteToy}`;
+  }
+
   /* 
     TASK 4
     In your own words explain the four principles for the "this" keyword below:
